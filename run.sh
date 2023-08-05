@@ -1,11 +1,12 @@
 #!/bin/bash
 
 set -e
+pwd=$(dirname $0)
 
-./install.sh
+$pwd/install.sh
 
 clear
 
 echo "Simple HDMI CEC media server - v0.0.1"
 
-cec-client | ./server.sh $1
+cec-client | $pwd/server.sh $1
