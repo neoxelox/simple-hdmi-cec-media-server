@@ -2,10 +2,7 @@
 
 **`Simple HDMI CEC media server`**
 
-Based on:
-
-- https://raspberrypi.stackexchange.com/a/95159
-- https://www.maketecheasier.com/watching-videos-on-raspberry-pi
+Based on https://raspberrypi.stackexchange.com/a/95159.
 
 ## Usage
 
