@@ -1,3 +1,21 @@
+# Custom
+.vscode/
+.idea/
+*.tmlanguage.cache
+*.tmPreferences.cache
+*.stTheme.cache
+.superinvoke_cache/
+*.sublime-workspace
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+.DS_Store
+tmp/
+.env*
+*.timestamp-*
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
