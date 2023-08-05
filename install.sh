@@ -14,7 +14,7 @@ then
     sudo apt-get install -y qdbus
 fi
 
-if [ -z "$(which vlc)" ]
+if [ -z "$(which cvlc)" ]
 then
     echo "VLC not installed"
     echo "Installing..."
