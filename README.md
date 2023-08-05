@@ -9,4 +9,4 @@ Based on:
 
 ## Usage
 
-Just execute `./main.sh <MEDIA_PATH>`, it will automatically install required packages if required and then serve all the videos and images of the `MEDIA_PATH` directory.
+Just execute `./run.sh <MEDIA_PATH>`, it will automatically install required packages if required and then serve all the videos and images of the `MEDIA_PATH` directory.
