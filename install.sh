@@ -4,19 +4,19 @@ if [ -z "$(which cec-client)" ]
 then
     echo "CEC Client not installed"
     echo "Installing..."
-    sudo apt install cec-utils
+    sudo apt install -y cec-utils
 fi
 
 if [ -z "$(which dbus-send)" ]
 then
     echo "QD Bus not installed"
     echo "Installing..."
-    sudo apt-get install qdbus
+    sudo apt-get install -y qdbus
 fi
 
 if [ -z "$(which vlc)" ]
 then
-    echo "OMX Player not installed"
+    echo "VLC not installed"
     echo "Installing..."
-    sudo apt-get install vlc
+    sudo apt-get install -y vlc
 fi

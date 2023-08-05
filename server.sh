@@ -5,6 +5,7 @@ media_files=()
 num_files=0
 current_file=0
 file_paused=0
+file_volume=1.0
 
 if [ ! -d "$media_path" ]
 then
@@ -71,6 +72,23 @@ function select_next_file() {
    current_file=${current_file/#-}
 }
 
+function set_volume() {
+   echo "Setting volume to $file_volume..."
+
+   dbus-send --type=method_call --dest=org.mpris.MediaPlayer2.vlc /org/mpris/MediaPlayer2 org.freedesktop.DBus.Properties.Set string:org.mpris.MediaPlayer2.Player string:Volume variant:double:$1
+}
+
+function increase_volume() {
+   file_volume=$(echo "$file_volume + 0.1" | bc)
+   set_volume $file_volume
+}
+
+function decrease_volume() {
+   file_volume=$(echo "$file_volume - 0.1" | bc)
+   set_volume $file_volume
+}
+
+set_volume $file_volume
 play_file ${media_files[$current_file]}
 
 while read one_line
@@ -106,6 +124,12 @@ do
                stop_file ${media_files[$current_file]}
                select_next_file
                play_file ${media_files[$current_file]}
+               ;;
+            "volume up")
+               increase_volume
+               ;;
+            "volume down")
+               decrease_volume
                ;;
          esac
       fi
