@@ -32,7 +32,7 @@ echo "Serving $num_files files of '$media_path' directory"
 function play_file() {
    echo "Playing $1..."
 
-   vlc --fullscreen --video-title-timeout 10000 $1 &
+   vlc --fullscreen --video-title-timeout 10000 $1 &> /dev/null &
 }
 
 function stop_file() {
