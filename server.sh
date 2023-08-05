@@ -1,6 +1,5 @@
 #!/bin/bash
 
-media_player=vlc
 media_path=$1
 media_files=()
 num_files=0
@@ -30,17 +29,30 @@ fi
 
 echo "Serving $num_files files of '$media_path' directory"
 
+function play_file() {
+   echo "Playing $1..."
+
+   vlc --fullscreen --video-title-timeout 10000 $1 &
+}
+
+function stop_file() {
+   echo "Stopping $1..."
+
+   killall -9 vlc
+}
+
 function resume_file() {
    echo "Resuming $1..."
 
    file_paused=0
-   $media_player $1
+   dbus-send --type=method_call --dest=org.mpris.MediaPlayer2.vlc /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause
 }
 
 function pause_file() {
    echo "Pausing $1..."
 
    file_paused=1
+   dbus-send --type=method_call --dest=org.mpris.MediaPlayer2.vlc /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause
 }
 
 function select_prev_file() {
@@ -59,7 +71,7 @@ function select_next_file() {
    current_file=${current_file/#-}
 }
 
-resume_file ${media_files[$current_file]}
+play_file ${media_files[$current_file]}
 
 while read one_line
 do
@@ -86,12 +98,14 @@ do
                fi
                ;;
             "rewind")
+               stop_file ${media_files[$current_file]}
                select_prev_file
-               resume_file ${media_files[$current_file]}
+               play_file ${media_files[$current_file]}
                ;;
             "Fast forward")
+               stop_file ${media_files[$current_file]}
                select_next_file
-               resume_file ${media_files[$current_file]}
+               play_file ${media_files[$current_file]}
                ;;
          esac
       fi

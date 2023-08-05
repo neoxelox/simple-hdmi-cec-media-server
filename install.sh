@@ -7,11 +7,11 @@ then
     sudo apt install cec-utils
 fi
 
-if [ -z "$(which xdotool)" ]
+if [ -z "$(which dbus-send)" ]
 then
-    echo "XDoTool not installed"
+    echo "QD Bus not installed"
     echo "Installing..."
-    sudo apt-get install xdotool
+    sudo apt-get install qdbus
 fi
 
 if [ -z "$(which vlc)" ]
