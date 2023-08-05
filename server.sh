@@ -88,8 +88,8 @@ function decrease_volume() {
    set_volume $file_volume
 }
 
-set_volume $file_volume
 play_file ${media_files[$current_file]}
+set_volume $file_volume
 
 while read one_line
 do
