@@ -4,7 +4,7 @@ if [ -z "$(which cec-client)" ]
 then
     echo "CEC Client not installed"
     echo "Installing..."
-    sudo apt install -y cec-utils
+    sudo apt-get install -y cec-utils
 fi
 
 if [ -z "$(which dbus-send)" ]
