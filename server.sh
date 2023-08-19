@@ -13,7 +13,7 @@ then
    exit 1
 fi
 
-for file in "$media_path"/*.mp4 "$media_path"/*.mov "$media_path"/*.avi
+for file in "$media_path"/*.mp4 "$media_path"/*.mov "$media_path"/*.mkv "$media_path"/*.avi
 do
    if [ -f "$file" ]
    then
