@@ -3,7 +3,7 @@
 media_path=$1
 media_files=()
 num_files=0
-current_file=0
+current_file=$(date +%Y%m%d)
 file_paused=0
 file_volume=1.0
 
@@ -33,7 +33,10 @@ echo "Serving $num_files files of '$media_path' directory"
 function play_file() {
    echo "Playing $1..."
 
-   cvlc --fullscreen --video-title-timeout 10000 --play-and-exit $1 &> /dev/null &
+   file_paused=0
+   file_title=${1##*/}
+   file_title=${file_title%.*}
+   cvlc --fullscreen --video-title-timeout 20000 --meta-title $file_title --play-and-exit $1 &> /dev/null &
 }
 
 function stop_file() {
@@ -59,17 +62,13 @@ function pause_file() {
 function select_prev_file() {
    echo "Selecting previous..."
 
-   current_file=$(($current_file-1))
-   current_file=$(($current_file%$num_files))
-   current_file=${current_file/#-}
+   current_file=$(python3 -c "print(($current_file-1)%$num_files)")
 }
 
 function select_next_file() {
    echo "Selecting next..."
 
-   current_file=$(($current_file+1))
-   current_file=$(($current_file%$num_files))
-   current_file=${current_file/#-}
+   current_file=$(python3 -c "print(($current_file+1)%$num_files)")
 }
 
 function set_volume() {
@@ -88,7 +87,9 @@ function decrease_volume() {
    set_volume $file_volume
 }
 
+select_next_file
 play_file ${media_files[$current_file]}
+sleep 5s
 set_volume $file_volume
 
 while read one_line
